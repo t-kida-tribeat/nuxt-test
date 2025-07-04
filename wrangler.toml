@@ -1,5 +1,5 @@
 # Top-level configuration
-name = "my-worker"
+name = "nuxt-test"
 main = "src/index.js"
 compatibility_date = "2022-07-12"
 
