@@ -1,19 +1,28 @@
-# Top-level configuration
-name = "nuxt-test"
-main = "src/index.js"
-compatibility_date = "2022-07-12"
+name = "nuxt-test" # Pagesプロジェクトの名前。pages.devのサブドメインにも影響。
 
-workers_dev = false
-route = { pattern = "example.org/*", zone_name = "example.org" }
+# Cloudflare Pages のビルド出力ディレクトリを指定
+# これが最もPagesで重要なwrangler.tomlの設定の一つ
+pages_build_output_dir = ".output/public" # Nuxt 3の場合。Nuxt 2なら "dist"
 
-kv_namespaces = [
-  { binding = "<MY_NAMESPACE>", id = "<KV_ID>" }
-]
+# オプション: 開発サーバーの設定 (wrangler dev を使う場合)
+# [dev]
+# ip = "127.0.0.1"
+# port = 8787
+# local_protocol = "http"
 
-[env.staging]
-name = "my-worker-staging"
-route = { pattern = "staging.example.org/*", zone_name = "example.org" }
+# オプション: 環境変数 (wrangler dev や Workers Functions で利用)
+[vars]
+# MY_API_KEY = "your_api_key_here" # 例: 環境変数
 
-kv_namespaces = [
-  { binding = "<MY_NAMESPACE>", id = "<STAGING_KV_ID>" }
-]
+# オプション: Cloudflare Workers Functions の設定
+# functions_directory = "functions" # Pages Functions を使う場合のディレクトリ (通常は /functions)
+
+# オプション: バインディング (R2, KV, D1など、Workers Functionsから利用可能にする)
+# Pagesプロジェクトでも、Functionsを通じてこれらのリソースにアクセスできる
+# [r2_buckets]
+# binding = "MY_R2_BUCKET" # コード内で参照する名前
+# bucket_name = "your-r2-bucket-name"
+
+# [kv_namespaces]
+# binding = "MY_KV_NAMESPACE" # コード内で参照する名前
+# id = "YOUR_KV_NAMESPACE_ID"
